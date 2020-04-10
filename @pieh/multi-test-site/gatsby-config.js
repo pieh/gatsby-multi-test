@@ -27,5 +27,13 @@ module.exports = {
         read_key: process.env.COSMIC_READ_KEY,
       },
     },
+    {
+      resolve: `@pieh/gatsby-theme-multi-test-sanity`,
+      options: {
+        projectId: process.env.SANITY_PROJECT_ID,
+        dataset: process.env.SANITY_PROJECT_DATASET,
+        token: process.env.SANITY_READ_TOKEN,
+      },
+    },
   ],
 };

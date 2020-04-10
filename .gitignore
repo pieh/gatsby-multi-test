@@ -7,3 +7,4 @@ yarn.lock
 !/yarn.lock
 yarn-error.log
 standalone-site
+dist

@@ -15,6 +15,7 @@
     "@pieh/gatsby-theme-multi-test-contentful": "^0.0.3",
     "@pieh/gatsby-theme-multi-test-cosmicjs": "^0.0.1",
     "@pieh/gatsby-theme-multi-test-datocms": "^0.0.2",
+    "@pieh/gatsby-theme-multi-test-sanity": "^0.0.0",
     "dotenv": "^8.2.0",
     "gatsby": "^2.20.16",
     "gatsby-image": "^2.3.2",

@@ -1,0 +1,19 @@
+{
+  "name": "@pieh/gatsby-theme-multi-test-sanity",
+  "version": "0.0.0",
+  "main": "package.json",
+  "license": "MIT",
+  "peerDependencies": {
+    "gatsby": "^2.20.16",
+    "gatsby-theme-multi-test": "~0.0.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "dependencies": {
+    "gatsby-source-sanity": "^5.0.6",
+    "lodash": "^4.17.15"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
