@@ -5,5 +5,4 @@ public
 yarn.lock
 .vscode
 !/yarn.lock
-lerna.json
 yarn-error.log
