@@ -1,7 +1,7 @@
 {
   "name": "ibtests",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "package.json",
   "author": "Michal Piechowiak <misiek.piechowiak@gmail.com>",
@@ -26,7 +26,6 @@
     "react": "^16.2",
     "react-dom": "^16.2"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git@github.com:pieh/gatsby-multi-test.git"
