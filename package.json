@@ -9,6 +9,6 @@
     "@pieh/*"
   ],
   "dependencies": {
-    "lerna": "^3.20.1"
+    "lerna": "^3.20.2"
   }
 }
