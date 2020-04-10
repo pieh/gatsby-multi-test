@@ -14,5 +14,11 @@ module.exports = {
         host: process.env.CONTENTFUL_HOST,
       },
     },
+    {
+      resolve: `@pieh/gatsby-theme-multi-test-datocms`,
+      options: {
+        apiToken: process.env.DATO_API_TOKEN,
+      },
+    },
   ],
 };
