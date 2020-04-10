@@ -11,5 +11,8 @@
   "dependencies": {
     "gatsby-plugin-sharp": "^2.5.4",
     "gatsby-transformer-sharp": "^2.4.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -12,5 +12,8 @@
   "dependencies": {
     "gatsby-source-contentful": "^2.2.7",
     "lodash": "^4.17.15"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
