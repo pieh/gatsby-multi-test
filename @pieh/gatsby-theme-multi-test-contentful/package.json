@@ -5,8 +5,12 @@
   "license": "MIT",
   "peerDependencies": {
     "gatsby": "^2.20.16",
+    "gatsby-theme-multi-test": "~0.0.0",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "gatsby-theme-multi-test": "~0.0.0"
+    "react-dom": "^16.12.0"
+  },
+  "dependencies": {
+    "gatsby-source-contentful": "^2.2.7",
+    "lodash": "^4.17.15"
   }
 }
