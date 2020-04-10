@@ -1,12 +1,12 @@
 {
   "name": "@pieh/gatsby-theme-multi-test-adapter-scaffold",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "package.json",
   "license": "MIT",
   "peerDependencies": {
     "gatsby": "^2.20.16",
+    "gatsby-theme-multi-test": "~0.0.0",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "gatsby-theme-multi-test": "~0.0.0"
+    "react-dom": "^16.12.0"
   }
 }
