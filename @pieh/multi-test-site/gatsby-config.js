@@ -20,5 +20,12 @@ module.exports = {
         apiToken: process.env.DATO_API_TOKEN,
       },
     },
+    {
+      resolve: `@pieh/gatsby-theme-multi-test-cosmicjs`,
+      options: {
+        bucketSlug: process.env.COSMIC_BUCKET,
+        read_key: process.env.COSMIC_READ_KEY,
+      },
+    },
   ],
 };

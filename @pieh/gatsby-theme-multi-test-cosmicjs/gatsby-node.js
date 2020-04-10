@@ -15,24 +15,24 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
   const source = {
     type: "String!",
     resolve: () => {
-      return "DatoCMS";
+      return "Cosmic";
     },
   };
 
-  const name = { type: "String!", resolve: createParentFieldResolver(`name`) };
+  const name = { type: "String!", resolve: createParentFieldResolver(`title`) };
 
   const createSlugField = (type) => {
     return {
       type: `String!`,
       resolve: (source, args, context) => {
-        return `/datocms/${type}/${getParent(source, context).slug}`;
+        return `/cosmicjs/${type}/${getParent(source, context).slug}`;
       },
     };
   };
 
   actions.createTypes([
     schema.buildObjectType({
-      name: `DatoCmsProductAdapted`,
+      name: `CosmicjsProductsAdapted`,
       interfaces: [`Node`, `Product`],
       fields: {
         name,
@@ -41,11 +41,11 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
 
         description: {
           type: "String!",
-          resolve: createParentFieldResolver(`description`),
+          resolve: createParentFieldResolver(`content`),
         },
         photo: {
           type: `File`,
-          resolve: (source, args, context, info) => {
+          resolve: async (source, args, context, info) => {
             const parent = getParent(source, context);
             if (!parent || !parent.fields) {
               return null;
@@ -61,13 +61,17 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
           type: `[Category]!`,
           resolve: (source, args, context, info) => {
             const parent = getParent(source, context);
-            const datoCMSCategories = context.nodeModel.getNodesByIds({
-              ids: parent.categories___NODE,
+            if (!parent || !parent.metadata || !parent.metadata.categories) {
+              return [];
+            }
+
+            const CosmicCategories = context.nodeModel.getNodesByIds({
+              ids: parent.metadata.categories.map((c) => c._id),
             });
 
             const categories = context.nodeModel.getNodesByIds({
-              ids: _.flatten(datoCMSCategories.map((node) => node.children)),
-              type: "DatoCmsCategoryAdapted",
+              ids: _.flatten(CosmicCategories.map((node) => node.children)),
+              type: "CosmicjsCategoriesAdapted",
             });
 
             return categories;
@@ -76,7 +80,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       },
     }),
     schema.buildObjectType({
-      name: `DatoCmsCategoryAdapted`,
+      name: `CosmicjsCategoriesAdapted`,
       interfaces: [`Node`, `Category`],
       fields: {
         name,
@@ -93,10 +97,10 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
                     categories: { elemMatch: { id: { eq: source.id } } },
                   },
                 },
-                type: `DatoCmsProductAdapted`,
+                type: `CosmicjsProductsAdapted`,
               },
               {
-                connectionType: `DatoCmsProductAdapted`,
+                connectionType: `CosmicjsProductsAdapted`,
               }
             );
 
@@ -116,8 +120,8 @@ exports.onCreateNode = async ({
   createNodeId,
 }) => {
   if (
-    node.internal.type === `DatoCmsProduct` ||
-    node.internal.type === `DatoCmsCategory`
+    node.internal.type === `CosmicjsProducts` ||
+    node.internal.type === `CosmicjsCategories`
   ) {
     const child = {
       id: `${node.id} > e`,
@@ -133,9 +137,12 @@ exports.onCreateNode = async ({
       child,
     });
 
-    if (node.internal.type === `DatoCmsProduct` && node.photo) {
-      const assetNode = getNode(node.photo.uploadId___NODE);
-      const { url } = assetNode;
+    if (
+      node.internal.type === `CosmicjsProducts` &&
+      node.metadata &&
+      node.metadata.photo
+    ) {
+      const { url } = node.metadata.photo;
 
       const imageNode = await createRemoteFileNode({
         url,
