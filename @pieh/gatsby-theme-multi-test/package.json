@@ -1,6 +1,6 @@
 {
   "name": "@pieh/gatsby-theme-multi-test",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "package.json",
   "license": "MIT",
   "peerDependencies": {
