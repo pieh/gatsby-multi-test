@@ -1,0 +1,13 @@
+{
+  "name": "inc-build-tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "@pieh/*"
+  ],
+  "dependencies": {
+    "lerna": "^3.20.2"
+  }
+}

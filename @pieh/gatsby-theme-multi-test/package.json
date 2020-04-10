@@ -1,0 +1,11 @@
+{
+  "name": "@pieh/gatsby-theme-multi-test",
+  "version": "0.0.0",
+  "main": "package.json",
+  "license": "MIT",
+  "peerDependencies": {
+    "gatsby": "^2.20.16",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  }
+}
