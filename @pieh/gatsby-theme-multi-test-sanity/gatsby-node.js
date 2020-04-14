@@ -138,6 +138,9 @@ exports.onCreateNode = async ({
       child,
     });
 
+    console.log("Sanity wat");
+    console.log(node);
+
     if (
       node.internal.type === `SanityProduct` &&
       node.photo &&

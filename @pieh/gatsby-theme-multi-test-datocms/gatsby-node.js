@@ -1,7 +1,13 @@
 const _ = require(`lodash`);
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`);
 
-exports.createSchemaCustomization = ({ actions, schema }) => {
+exports.createSchemaCustomization = ({
+  actions,
+  schema,
+  getNode,
+  getNodes,
+  store,
+}) => {
   const getParent = (node, context) => {
     return context.nodeModel.getNodeById({
       id: node.parent,
@@ -54,6 +60,9 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
             const localFile = context.nodeModel.getNodeById({
               id: parent.fields.photoId,
             });
+            const t = getNode(parent.fields.photoId);
+            const nodes = getNodes();
+            const state = store.getState();
             return localFile;
           },
         },
@@ -115,10 +124,12 @@ exports.onCreateNode = async ({
   getCache,
   createNodeId,
 }) => {
+  const b = 4;
   if (
     node.internal.type === `DatoCmsProduct` ||
     node.internal.type === `DatoCmsCategory`
   ) {
+    console.log("[dato-cms] Running onCreateNode", node.id);
     const child = {
       id: `${node.id} > e`,
       parent: node.id,
@@ -137,6 +148,8 @@ exports.onCreateNode = async ({
       const assetNode = getNode(node.photo.uploadId___NODE);
       const { url } = assetNode;
 
+      console.log(`[dato-cms] Downloading ${url}`);
+
       const imageNode = await createRemoteFileNode({
         url,
         parentNodeId: node.id,
@@ -145,6 +158,17 @@ exports.onCreateNode = async ({
         createNode: actions.createNode,
         createNodeId,
       });
+
+      // workaround bug in createRemoteFileNode - it store created node objects
+      // in internal cache, but doesn't track if nodes were garbage collected
+      // because of that I need to make sure that this node actually exists before trying
+      // to use it
+      if (!getNode(imageNode.id)) {
+        delete node.internal.owner;
+        createNode(node, {
+          name: `gatsby-source-filesystem`,
+        });
+      }
 
       actions.createParentChildLink({
         parent: node,
@@ -156,6 +180,10 @@ exports.onCreateNode = async ({
         name: "photoId",
         value: imageNode.id,
       });
+
+      console.log(`[dato-cms] Downloaded ${url}`);
+      // console.log('stuff')
     }
+    console.log("[dato-cms] Ran onCreateNode", node.id);
   }
 };
