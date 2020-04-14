@@ -164,8 +164,8 @@ exports.onCreateNode = async ({
       // because of that I need to make sure that this node actually exists before trying
       // to use it
       if (!getNode(imageNode.id)) {
-        delete node.internal.owner;
-        actions.createNode(node, {
+        delete imageNode.internal.owner;
+        actions.createNode(imageNode, {
           name: `gatsby-source-filesystem`,
         });
       }
