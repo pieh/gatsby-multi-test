@@ -1,7 +1,7 @@
 {
   "name": "multi-test-site",
   "private": true,
-  "version": "0.0.7",
+  "version": "0.0.8",
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
@@ -14,7 +14,7 @@
     "@pieh/gatsby-theme-multi-test": "^0.0.3",
     "@pieh/gatsby-theme-multi-test-contentful": "^0.0.3",
     "@pieh/gatsby-theme-multi-test-cosmicjs": "^0.0.2",
-    "@pieh/gatsby-theme-multi-test-datocms": "^0.0.3",
+    "@pieh/gatsby-theme-multi-test-datocms": "^0.0.4",
     "@pieh/gatsby-theme-multi-test-sanity": "^0.0.2",
     "dotenv": "^8.2.0",
     "gatsby": "^2.20.17",
